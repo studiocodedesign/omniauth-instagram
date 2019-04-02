@@ -16,7 +16,8 @@ module OmniAuth
         options[:response_type] ||= 'code'
         options[:enforce_signed_requests] ||= false
         options[:extra_data] ||= false
-        super
+
+        redirect client.auth_code.authorize_url({:redirect_uri => callback_url}.merge(authorize_params).merge(hl: 'en'))
       end
 
       uid { raw_info['id'] }
